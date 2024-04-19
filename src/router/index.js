@@ -7,7 +7,60 @@ const routes = [
     meta: {
       title: '首頁'
     },
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/views/HomeView.vue'),
+    children: [
+      { // 功能
+        path: '/功能',
+        name: '功能區塊',
+        meta: {
+          title: '功能區塊'
+        },
+        children: [
+          // {
+          //   path: '/',
+          //   name: '',
+          //   meta: {
+          //     title: ''
+          //   },
+          //   component: () => import('')
+          // }
+        ]
+      },
+      { // 考題
+        path: '/考題',
+        name: '考題區塊',
+        meta: {
+          title: '考題區塊'
+        },
+        children: [
+          // {
+          //   path: '/',
+          //   name: '',
+          //   meta: {
+          //     title: ''
+          //   },
+          //   component: () => import('')
+          // }
+        ]
+      },
+      { // 元件
+        path: '/元件',
+        name: '元件區塊',
+        meta: {
+          title: '元件區塊'
+        },
+        children: [
+          // {
+          //   path: '/',
+          //   name: '',
+          //   meta: {
+          //     title: ''
+          //   },
+          //   component: () => import('')
+          // }
+        ]
+      }
+    ]
   }
 ]
 
