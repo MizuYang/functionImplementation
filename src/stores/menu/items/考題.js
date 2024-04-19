@@ -4,12 +4,12 @@ import { ref } from 'vue'
 export const use考題Store = defineStore('考題', () => {
   // data
   const 考題data = ref({
-    menuName: '考題',
+    title: '考題',
     page: [
-      {
-        routerPath: '',
-        pageName: ''
-      }
+      // {
+      //   routerPath: '',
+      //   pageName: ''
+      // }
     ]
   })
   return {

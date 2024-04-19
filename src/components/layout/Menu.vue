@@ -1,26 +1,70 @@
 <script setup>
+import { useMenuStore } from '@/stores/menu/userMenu.js'
+
+const { 功能data } = useMenuStore()
+const { 考題data } = useMenuStore()
+const { 元件data } = useMenuStore()
 
 </script>
 
 <template>
   <nav>
-    <ul class="px-2 py-5"
-        id="menu">
-      <li class="">
-        <RouterLink to=''
-                    class="d-block w-100 ps-3 py-2"
-                    active-class='active'>
-          錨點跳轉
-        </RouterLink>
-      </li>
-      <li class="">
-        <RouterLink to=''
-                    class="d-block w-100 ps-3 py-2"
-                    active-class='active'>
-          錨點跳轉
-        </RouterLink>
-      </li>
-    </ul>
+    <!-- 功能 -->
+    <template v-if="功能data.page.length">
+      <h3 class="text-center text-light fw-bold-9 pt-5">
+        {{ 功能data.title }}
+      </h3>
+      <ul class="px-2 py-5"
+          id="menu">
+        <template v-for="item in 功能data.page" :key="item.pageName">
+          <li>
+            <RouterLink :to='item.routerPath'
+                        class="d-block w-100 ps-3 py-2"
+                        active-class='active'>
+              <span>{{ item.pageName }}</span>
+            </RouterLink>
+          </li>
+        </template>
+      </ul>
+    </template>
+
+    <!-- 考題 -->
+    <template v-if="考題data.page.length">
+      <h3 class="text-center text-light fw-bold-9 pt-5">
+        {{ 考題data.title }}
+      </h3>
+      <ul class="px-2 py-5"
+          id="menu">
+        <template v-for="item in 考題data.page" :key="item.pageName">
+          <li>
+            <RouterLink :to='item.routerPath'
+                        class="d-block w-100 ps-3 py-2"
+                        active-class='active'>
+              <span>{{ item.pageName }}</span>
+            </RouterLink>
+          </li>
+        </template>
+      </ul>
+    </template>
+
+    <!-- 元件 -->
+    <template v-if="元件data.page.length">
+      <h3 class="text-center text-light fw-bold-9 pt-5">
+        {{ 元件data.title }}
+      </h3>
+      <ul class="px-2 py-5"
+          id="menu">
+        <template v-for="item in 元件data.page" :key="item.pageName">
+          <li>
+            <RouterLink :to='item.routerPath'
+                        class="d-block w-100 ps-3 py-2"
+                        active-class='active'>
+              <span>{{ item.pageName }}</span>
+            </RouterLink>
+          </li>
+        </template>
+      </ul>
+    </template>
   </nav>
 </template>
 
@@ -43,7 +87,11 @@ ul > li > a {
   &:hover {
     color: #fff;
     background-color:#6f6f6f;
-
+  }
+  &:hover > span {
+    font-weight: 700;
+    margin-left: 5px;
+    transition: .1s margin-left linear;
   }
 }
 </style>

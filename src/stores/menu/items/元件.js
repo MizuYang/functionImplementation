@@ -4,12 +4,12 @@ import { ref } from 'vue'
 export const use元件Store = defineStore('元件', () => {
   // data
   const 元件data = ref({
-    menuName: '元件',
+    title: '元件',
     page: [
-      {
-        routerPath: '',
-        pageName: ''
-      }
+      // {
+      //   routerPath: '',
+      //   pageName: ''
+      // }
     ]
   })
   return {
