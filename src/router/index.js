@@ -3,60 +3,66 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: '首頁',
     meta: {
       title: '首頁'
     },
     component: () => import('@/views/HomeView.vue'),
     children: [
       { // 功能
-        path: '/功能',
+        path: 'function',
         name: '功能區塊',
         meta: {
           title: '功能區塊'
         },
+        component: () => import('@/views/demo/功能/功能.vue'),
+
         children: [
-          // {
-          //   path: '/',
-          //   name: '',
-          //   meta: {
-          //     title: ''
-          //   },
-          //   component: () => import('')
-          // }
+          {
+            path: 'page1',
+            name: '錨點跳轉',
+            meta: {
+              title: '錨點跳轉'
+            },
+            component: () => import('@/views/demo/功能/items/錨點跳轉.vue')
+          }
         ]
       },
       { // 考題
-        path: '/考題',
+        path: '考題',
         name: '考題區塊',
         meta: {
           title: '考題區塊'
         },
+        component: () => import('@/views/demo/考題/考題.vue'),
+
         children: [
           // {
-          //   path: '/',
+          //   path: '',
           //   name: '',
           //   meta: {
           //     title: ''
           //   },
-          //   component: () => import('')
+          //   component: () => import('@/views/demo/考題/items/.vue')
           // }
         ]
       },
       { // 元件
-        path: '/元件',
+        path: '元件',
         name: '元件區塊',
         meta: {
           title: '元件區塊'
         },
+        component: () => import('@/views/demo/元件/元件.vue'),
+
         children: [
           // {
-          //   path: '/',
+          //   path: '',
           //   name: '',
           //   meta: {
           //     title: ''
           //   },
-          //   component: () => import('')
+          //   component: () => import('@/views/demo/元件/items/.vue')
           // }
         ]
       }
