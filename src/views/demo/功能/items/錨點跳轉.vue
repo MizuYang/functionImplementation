@@ -18,14 +18,16 @@ function getData () {
     }
   }
 }
-function goToPosition (item) {
+function goToTitlePosition (item) {
   const el = document.querySelector(`#title-${item.id}`)
   const { top, height } = el.getBoundingClientRect()
   const elCenter = top + height / 2
   const screenHeight = document.querySelector('#nav').clientHeight
   const position = elCenter - (screenHeight / 4)
   currentTarget.value = item.id
-
+  goToPosition(position)
+}
+function goToPosition (position) {
   window.scrollTo(0, position)
 }
 </script>
@@ -43,7 +45,7 @@ function goToPosition (item) {
           <a href="javascript:;"
              class="d- text-light p-2"
              :class="currentTarget===item.id?'active-style':'default-style'"
-             @click="goToPosition(item)">
+             @click="goToTitlePosition(item)">
             {{ idx+1 }}
           </a>
         </li>
@@ -51,9 +53,10 @@ function goToPosition (item) {
     </ul>
   </div>
 
+  <!-- 文章列表 -->
   <ul class="px-15">
     <template v-for="item in data" :key="`id-${item.id}`">
-      <li class="my-5"
+      <li class="my-5 p-3"
           :class="{'active-style':currentTarget===item.id}">
         <h2 class="text-20 fw-bold-9"
             :id="`title-${item.id}`">
@@ -66,6 +69,13 @@ function goToPosition (item) {
       </li>
     </template>
   </ul>
+
+  <!-- 向上錨點 -->
+  <a href="javascript:;"
+     class="btn-top text-light border rounded-pill p-5 px-7"
+     @click="goToPosition(0)">
+    電梯 <br /> 向上
+  </a>
 </template>
 
 <style lang='scss' scope>
@@ -74,5 +84,15 @@ function goToPosition (item) {
 }
 .default-style {
   background-color: #484848;;
+}
+.btn-top {
+  position: fixed;
+  right:30px;
+  bottom:150px;
+  background-color: #484848;
+
+  &:hover {
+    background-color: #7b7fad;
+  }
 }
 </style>
