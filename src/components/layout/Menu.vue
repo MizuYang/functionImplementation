@@ -1,9 +1,19 @@
 <script setup>
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { useMenuStore } from '@/stores/menu/userMenu.js'
 
 const { 功能data } = useMenuStore()
 const { 考題data } = useMenuStore()
 const { 元件data } = useMenuStore()
+
+// data
+const curPageId = ref('')
+
+const route = useRoute()
+watch(() => route.path, () => {
+  curPageId.value = route.path
+}, { immediate: true })
 
 </script>
 
@@ -27,6 +37,7 @@ const { 元件data } = useMenuStore()
           <li>
             <RouterLink :to='`${item.routerPath}`'
                         class="d-block w-100 ps-3 py-2"
+                        :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
             </RouterLink>
@@ -109,5 +120,8 @@ ul > li > a {
     color: #fff;
     background-color:#858484;
   }
+}
+.active-page {
+  background-color:#9c75d4;
 }
 </style>
