@@ -3,11 +3,11 @@ import { ref, onMounted } from 'vue'
 
 // data
 const data = ref([])
+const currentTarget = ref('')
 
 onMounted(() => {
   data.value.length = 100
   getData()
-  console.log(data.value)
 })
 
 function getData () {
@@ -18,14 +18,43 @@ function getData () {
     }
   }
 }
+function goToPosition (item) {
+  const el = document.querySelector(`#title-${item.id}`)
+  const { top, height } = el.getBoundingClientRect()
+  const elCenter = top + height / 2
+  const screenHeight = document.querySelector('#nav').clientHeight
+  const position = elCenter - (screenHeight / 4)
+  currentTarget.value = item.id
+
+  window.scrollTo(0, position)
+}
 </script>
 
 <template>
 
   <h1 class="text-30 ps-15">文章列表</h1>
+
+  <!-- 錨點 -->
+  <div class="mb-10 px-15">
+    <p class="text-20 py-5">錨點</p>
+    <ul class="row row-cols-10 g-5">
+      <template v-for="(item,idx) in data" :key="`a-link-${item.id}`">
+        <li class="col">
+          <a href="javascript:;"
+             class="d- text-light p-2"
+             :class="currentTarget===item.id?'active-style':'default-style'"
+             @click="goToPosition(item)">
+            {{ idx+1 }}
+          </a>
+        </li>
+      </template>
+    </ul>
+  </div>
+
   <ul class="px-15">
     <template v-for="item in data" :key="`id-${item.id}`">
-      <li class="my-5">
+      <li class="my-5"
+          :class="{'active-style':currentTarget===item.id}">
         <h2 class="text-20 fw-bold-9"
             :id="`title-${item.id}`">
           {{ item.title }}
@@ -39,4 +68,11 @@ function getData () {
   </ul>
 </template>
 
-<style lang='scss' scope></style>
+<style lang='scss' scope>
+.active-style {
+  background-color: #7b7fad;
+}
+.default-style {
+  background-color: #484848;;
+}
+</style>

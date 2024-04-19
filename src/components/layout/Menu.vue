@@ -8,7 +8,7 @@ const { 元件data } = useMenuStore()
 </script>
 
 <template>
-  <nav>
+  <nav id="nav">
     <div class="text-20 text-center" style="margin-bottom: 30px;">
       <RouterLink to='/'
         class="btn-home d-block w-100 py-2"
