@@ -9,6 +9,13 @@ const { 元件data } = useMenuStore()
 
 <template>
   <nav>
+    <div class="text-20 text-center" style="margin-bottom: 30px;">
+      <RouterLink to='/'
+        class="btn-home d-block w-100 py-2"
+        active-class='active'>
+        <span>首頁</span>
+      </RouterLink>
+    </div>
     <!-- 功能 -->
     <template v-if="功能data.page.length">
       <h3 class="text-center text-light fw-bold-9 pt-5">
@@ -18,7 +25,7 @@ const { 元件data } = useMenuStore()
           id="menu">
         <template v-for="item in 功能data.page" :key="item.pageName">
           <li>
-            <RouterLink :to='item.routerPath'
+            <RouterLink :to='`${item.routerPath}`'
                         class="d-block w-100 ps-3 py-2"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
@@ -92,6 +99,15 @@ ul > li > a {
     font-weight: 700;
     margin-left: 5px;
     transition: .1s margin-left linear;
+  }
+}
+.btn-home {
+  color: #fff;
+  background-color:#6f6f6f;
+
+  &:hover {
+    color: #fff;
+    background-color:#858484;
   }
 }
 </style>
