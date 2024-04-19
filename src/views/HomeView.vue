@@ -12,7 +12,7 @@ const isHome = ref(null)
 
 watch(() => route.path, () => {
   isHome.value = route.name === '首頁'
-})
+}, { immediate: true })
 
 onMounted(() => {
   getMenuWidth()
