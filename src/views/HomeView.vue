@@ -1,19 +1,29 @@
-<template>
-  <p class="text-primary-color position-absolute-center">
-    {{ userInfo.email }} <br />
-    {{ userInfo.phone }}
-  </p>
-</template>
-
 <script setup>
-import { storeToRefs } from 'pinia'
-import { useUserInfoStore } from '@/stores/userStore.js'
+import { ref, onMounted } from 'vue'
+import Menu from '@/components/layout/Menu.vue'
 
-// store
-const { getUserInfo } = useUserInfoStore()
-const { userInfo } = storeToRefs(useUserInfoStore())
+// data
+const bodyWidth = document.body.clientWidth
+console.log(bodyWidth)
+const menuWidth = ref(200)
 
-getUserInfo()
+onMounted(() => {
+  getMenuWidth()
+})
+
+function getMenuWidth () {
+  const menu = document.querySelector('#menu')
+  menuWidth.value = menu.clientWidth
+}
 </script>
+
+<template>
+  <Menu />
+
+  <div :style="`margin-left:${menuWidth}px;
+                max-width:${bodyWidth}px`">
+
+  </div>
+</template>
 
 <style lang='scss' scope></style>
