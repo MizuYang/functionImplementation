@@ -31,7 +31,7 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 功能data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 功能data.page" :key="item.pageName">
           <li>
@@ -51,7 +51,7 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 考題data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 考題data.page" :key="item.pageName">
           <li>
@@ -70,7 +70,7 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 元件data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 元件data.page" :key="item.pageName">
           <li>
@@ -93,13 +93,13 @@ nav {
   min-height: 100vh;
   background-color:#535353;
 }
-ul > li:nth-child(1) {
+.menu li:nth-child(1) {
   border-top: 1px solid #fff;
 }
-ul > li {
+.menu li {
   border-bottom: 1px solid #fff;
 }
-ul > li > a {
+.menu li > a {
   color: #fff;
 
   &:hover {
