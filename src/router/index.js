@@ -25,6 +25,14 @@ const routes = [
               title: '錨點跳轉'
             },
             component: () => import('@/views/demo/功能/items/錨點跳轉.vue')
+          },
+          {
+            path: 'page2',
+            name: '計算機',
+            meta: {
+              title: '計算機'
+            },
+            component: () => import('@/views/demo/功能/items/計算機.vue')
           }
         ]
       },

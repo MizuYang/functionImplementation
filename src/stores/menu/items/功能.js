@@ -9,6 +9,9 @@ export const use功能Store = defineStore('功能', () => {
       {
         pageName: '錨點跳轉'
         // routerPath: '/function/page1'
+      },
+      {
+        pageName: '計算機'
       }
     ]
   })
