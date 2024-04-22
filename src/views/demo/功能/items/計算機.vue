@@ -19,7 +19,8 @@ const data = ref([
   <div class="計算機外殼 p-5">
 
     <!-- 計算機面板 -->
-    <div class="text-end mb-10">
+    <div class="text-end pt-10 pb-5 pe-5 mx-5 mt-5 mb-10"
+         style="background-color:#ff00c817;">
       <!-- 公式區塊 -->
       <div>
         <p style="letter-spacing: 4px;">
@@ -62,5 +63,12 @@ const data = ref([
   height: 70px;
   background-color: #fff;
   border: none;
+
+  &:hover {
+    background-color: #cbc9c9;
+  }
+  &:active {
+    background-color: #dcdbdb;
+  }
 }
 </style>
