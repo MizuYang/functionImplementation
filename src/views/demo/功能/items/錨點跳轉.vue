@@ -34,8 +34,6 @@ function goToPosition (position) {
 
 <template>
 
-  <h1 class="text-30 ps-15">文章列表</h1>
-
   <!-- 錨點 -->
   <div class="mb-10 px-15">
     <p class="text-20 py-5">錨點</p>
@@ -54,6 +52,8 @@ function goToPosition (position) {
   </div>
 
   <!-- 文章列表 -->
+  <h1 class="text-30 ps-15">文章列表</h1>
+
   <ul class="px-15">
     <template v-for="item in data" :key="`id-${item.id}`">
       <li class="my-5 p-3"

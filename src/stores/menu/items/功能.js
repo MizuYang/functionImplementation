@@ -9,6 +9,10 @@ export const use功能Store = defineStore('功能', () => {
       {
         routerPath: '/function/page1',
         pageName: '錨點跳轉'
+      },
+      {
+        routerPath: '/function/page2',
+        pageName: '圖片放大鏡'
       }
     ]
   })

@@ -25,6 +25,14 @@ const routes = [
               title: '錨點跳轉'
             },
             component: () => import('@/views/demo/功能/items/錨點跳轉.vue')
+          },
+          {
+            path: 'page2',
+            name: '圖片放大鏡',
+            meta: {
+              title: '圖片放大鏡'
+            },
+            component: () => import('@/views/demo/功能/items/圖片放大鏡.vue')
           }
         ]
       },
