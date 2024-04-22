@@ -8,6 +8,7 @@ const imgWidth = ref(300)
 const imgHeight = ref(300)
 const glassTop = ref(0)
 const glassLeft = ref(0)
+const throttleMouseMove = throttle(30, mousemove)
 
 const root = document.documentElement
 root.style.setProperty('--img-width', `${imgWidth.value}px`)
@@ -71,6 +72,19 @@ function mousemove (e) {
   console.log('offsetX', e.offsetX)
   console.log('offsetY', e.offsetY)
 }
+function throttle (delay, callback) {
+  // 函式執行後在指定時間內不論呼叫函式多少次, 都不會執行
+  let lastTime = Date.now()
+
+  return function (e) {
+    const now = Date.now()
+    if (now - lastTime >= delay) {
+      callback(e)
+      // 初始化
+      lastTime = now
+    }
+  }
+}
 </script>
 
 <template>
@@ -103,7 +117,7 @@ function mousemove (e) {
 
         <!-- 蓋在最上方的透明元素, 方便滑鼠事件取得 x, y -->
         <div class="position-absolute top-0 bottom-0 start-0 end-0 z50"
-             @mousemove="mousemove">
+             @mousemove="throttleMouseMove">
         </div>
       </div>
 
