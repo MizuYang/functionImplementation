@@ -4,6 +4,8 @@ import imgUrl from '@/assets/images/demo/功能/圖片放大鏡.jpg'
 
 // data
 const zoom = ref(2)
+const glassTop = ref(0)
+const glassLeft = ref(0)
 
 // 設定圖片倍率
 watchEffect(() => {
@@ -18,11 +20,22 @@ watchEffect(() => {
   <div class="position-absolute-center-200 p-15">
     <div class="d-flex">
       <!-- 左側原始圖 -->
-      <div class="me-15">
-        <img src="@/assets/images/demo/功能/圖片放大鏡.jpg"
-             alt="圖片放大鏡"
-             width="300"
-             height="300">
+      <div class="position-relative me-15">
+        <div>
+          <img src="@/assets/images/demo/功能/圖片放大鏡.jpg"
+               class="d-block"
+               alt="圖片放大鏡"
+               width="300"
+               height="300">
+        </div>
+
+        <!-- 放大鏡 -->
+        <div class="glass position-absolute"
+             :style="[
+              `--top:${glassTop}px`,
+              `--left:${glassLeft}px`
+             ]">
+        </div>
       </div>
       <!-- 右側放大圖 -->
       <div style="max-width:300px;
@@ -51,13 +64,25 @@ watchEffect(() => {
 </template>
 
 <style lang='scss' scope>
+:root {
+  --img-width: 300px;
+  --img-height: 300px;
+}
 .zoom-img {
   --zoom: 2;
-  width: calc(var(--zoom) * 300px);
-  height: calc(var(--zoom) * 300px);
+  width: calc(var(--zoom) * var(--img-width));
+  height: calc(var(--zoom) * var(--img-height));
   display: block;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: -300px 0;
+}
+.glass {
+  width: calc(var(--img-width) / 4);
+  height: calc(var(--img-height) / 4);
+  display: block;
+  top: var(--top);
+  left: var(--left);
+  background-color: #ffffff56;
 }
 </style>
