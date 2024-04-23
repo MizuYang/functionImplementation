@@ -14,6 +14,12 @@ const result = ref('')
 const computedData = computed(() => (calc.value.replace(/負/g, '-')))
 
 function calcFn (item) {
+  // 如果已經有算出答案了, 則初始化
+  if (result.value) {
+    calc.value = ''
+    result.value = ''
+  }
+
   if (item === '清除') {
     calc.value = ''
     result.value = ''
