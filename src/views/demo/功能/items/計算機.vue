@@ -1,16 +1,50 @@
 <script setup>
 import { ref } from 'vue'
-console.log(eval((1+2)*3-(4+15))) // eslint-disable-line
-
+// console.log(eval((1+2)*3-(4+15))) // eslint-disable-line
 const data = ref([
-  '', '修正', '清除', '倒退',
+  '', '', '清除', '倒退',
   '%', '(', ')', '÷',
   '7', '8', '9', '×',
   '4', '5', '6', '－',
   '1', '2', '3', '＋',
   '±', '0', '.', '＝'
-
 ])
+// 每次按計算機都 push 到 record 陣列
+// const record = ref([
+//   // {
+//   //   value: '',
+//   //   type: '' // 數字|小數點|運算符號
+//   // }
+// ])
+const calc = ref('')
+const result = ref('')
+
+function calcFn (item) {
+  if (item === '清除') {
+    return
+  } else if (item === '倒退') {
+    return
+  }
+  // 先區分是數字還是運算符號
+  const mark = ['＋', '－', '×', '÷', '%', '(', ')', '.', '±', '＝']
+  const canChangeMark = ['＋', '－', '×', '÷', '%']
+  const isMark = mark.includes(item)
+  if (isMark) {
+    // 符號
+    const lastItem = calc.value.at(-1)
+    console.log('前一個item', lastItem)
+    console.log('這次的item', item)
+
+    // 如果前面有數字, 才可以加入運算符號
+    if (!calc.value.split('').length && item !== '(') return
+
+    console.log('執行', item)
+    console.log(canChangeMark.includes(lastItem))
+  } else {
+    // 處理:數字
+    calc.value += item
+  }
+}
 </script>
 
 <template>
@@ -24,7 +58,8 @@ const data = ref([
       <!-- 公式區塊 -->
       <div>
         <p style="letter-spacing: 4px;">
-          (1+2)*3-(4+5)
+          <!-- (1+2)*3-(4+5) -->
+          {{ calc }}
         </p>
       </div>
 
@@ -33,7 +68,9 @@ const data = ref([
         <p style="font-size:45px;
                   letter-spacing: 4px;
                   line-height: 1.2;">
-          123456
+          <!-- 123456 -->
+          <!-- {{ tempNum || result || 0 }} -->
+          {{ result || 0 }}
         </p>
       </div>
     </div>
@@ -43,7 +80,8 @@ const data = ref([
       <template v-for="item in data" :key="item">
         <li class="col">
           <button type="button"
-                  class="btn btn-計算機按鈕">
+                  class="btn btn-計算機按鈕"
+                  @click="calcFn(item)">
             {{ item }}
           </button>
         </li>
