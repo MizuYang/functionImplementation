@@ -62,6 +62,23 @@ function calcFn (item) {
           calc.value += item
         }
       }
+    } else if (item === ')') {
+      console.log('進入 )')
+      // 處理: )
+      // 如果前一個是數字，而且前面有烙單的'('，才可以加入')'
+      let left = 0
+      let right = 0
+      for (let i = 0; i < calc.value.length; i++) {
+        if (calc.value[i] === '(') {
+          left++
+        } else if (calc.value[i] === ')') {
+          right++
+        }
+      }
+      const isPass = left > right
+      if (!mark.includes(lastItem) && left > 0 && isPass) {
+        calc.value += item
+      }
     }
   } else {
     // 處理:數字
