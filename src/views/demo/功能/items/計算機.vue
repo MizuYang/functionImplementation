@@ -25,10 +25,10 @@ function calcFn (item) {
   // 先區分是數字還是運算符號
   const mark = ['＋', '－', '×', '÷', '%', '(', ')', '.', '±', '＝']
   const canChangeMark = ['＋', '－', '×', '÷', '%']
+  const lastItem = calc.value.at(-1)
   const isMark = mark.includes(item)
   if (isMark) {
     // 符號
-    const lastItem = calc.value.at(-1)
 
     // 如果前面有數字, 才可以加入運算符號
     if (!calc.value.split('').length && item !== '(') return
@@ -137,7 +137,18 @@ function calcFn (item) {
     }
   } else {
     // 處理:數字
-    calc.value += item
+
+    // 防止數字變成 00
+    if (lastItem === '0' && item === '0') return
+    if (lastItem === '0') {
+      // 防止 01、02、03~09
+      const data = calc.value.split('')
+      data.splice(-1, 1)
+      data.push(item)
+      calc.value = data.join('')
+    } else {
+      calc.value += item
+    }
   }
 }
 </script>
