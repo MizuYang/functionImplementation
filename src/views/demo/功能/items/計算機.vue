@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 // console.log(eval((1+2)*3-(4+15))) // eslint-disable-line
-// console.log(eval('.5+2')) // eslint-disable-line
 const data = ref([
   '', '', '清除', '倒退',
   '%', '(', ')', '÷',
@@ -10,19 +9,13 @@ const data = ref([
   '1', '2', '3', '＋',
   '±', '0', '.', '＝'
 ])
-// 每次按計算機都 push 到 record 陣列
-// const record = ref([
-//   // {
-//   //   value: '',
-//   //   type: '' // 數字|小數點|運算符號
-//   // }
-// ])
 const calc = ref('')
 const result = ref('')
 
 function calcFn (item) {
   if (item === '清除') {
     calc.value = ''
+    result.value = ''
     return
   } else if (item === '倒退') {
     calc.value = calc.value.slice(0, -1)
@@ -124,6 +117,14 @@ function calcFn (item) {
         const isPass = !ary.includes('.')
         if (isPass) calc.value += item
       }
+    } else if (item === '＝') {
+      // 將 '＋', '－', '×', '÷', '負' 轉換成 '+', '-', '*', '/', '-'
+      const calcData = calc.value.replace(/＋/g, '+')
+        .replace(/－/g, '-')
+        .replace(/×/g, '*')
+        .replace(/÷/g, '/')
+        .replace(/負/g, '-')
+      result.value = eval(calcData) // eslint-disable-line
     } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
       console.log("這次和上次都是 '＋', '－', '×', '÷', '%'")
 
