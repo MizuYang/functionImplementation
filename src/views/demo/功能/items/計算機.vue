@@ -177,9 +177,18 @@ function calcFn (item) {
   } else {
     // 處理:數字
 
-    // 防止數字變成 00
-    if (lastItem === '0' && item === '0') return
-    if (lastItem === '0') {
+    // 需先判斷是否為小數點  防止數字變成 00，但可以 0.0001
+    const curIndex = calc.value.length
+    let lastIndex = 0
+    for (let i = curIndex; i >= 0; i--) {
+      if (mark.includes(calc.value[i]) && calc.value[i] !== '.') {
+        lastIndex = i + 1
+        break
+      }
+    }
+    const 是小數 = calc.value.slice(lastIndex, curIndex).includes('.')
+    if (lastItem === '0' && item === '0' && !是小數) return
+    if (lastItem === '0' && !是小數) {
       // 防止 01、02、03~09
       const data = calc.value.split('')
       data.splice(-1, 1)
