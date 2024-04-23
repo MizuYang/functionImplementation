@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 // console.log(eval((1+2)*3-(4+15))) // eslint-disable-line
+// console.log(eval('.5+2')) // eslint-disable-line
 const data = ref([
   '', '', '清除', '倒退',
   '%', '(', ')', '÷',
@@ -100,6 +101,27 @@ function calcFn (item) {
           calc.value = data.join('')
         }
       }
+    } else if (item === '.') {
+      console.log('進入 .')
+      // 處理: .
+      // 如果前一個是數字，而且前面沒有小數點，才可以加入'.'
+      if (!mark.includes(lastItem) && lastItem !== undefined) {
+        // 如果前一個是數字，而且前面沒有小數點，才可以加入'.'
+        // 找出當前的位置~前一個運算符號的位置, 並使用 slice 取出
+        // 再使用 includes 判斷是否有小數點
+        // 有小數點就不能加入
+        const curIndex = calc.value.length
+        let lastIndex = 0
+        for (let i = curIndex; i >= 0; i--) {
+          if (mark.includes(calc.value[i])) {
+            lastIndex = i
+            break
+          }
+        }
+        const ary = calc.value.slice(lastIndex, curIndex)
+        const isPass = !ary.includes('.')
+        if (isPass) calc.value += item
+      }
     } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
       console.log("這次和上次都是 '＋', '－', '×', '÷', '%'")
 
@@ -111,6 +133,16 @@ function calcFn (item) {
       const data = calc.value.split('')
       data[data.length - 1] = item
       calc.value = data.join('')
+    } else if (canChangeMark.includes(item)) {
+      // 處理: 這次是 '＋', '－', '×', '÷', '%'
+      console.log("這次是 '＋', '－', '×', '÷', '%'")
+
+      if (lastItem === undefined) return
+      if (lastItem === '(') return
+
+      calc.value += item
+    } else {
+      calc.value += item
     }
   } else {
     // 處理:數字
