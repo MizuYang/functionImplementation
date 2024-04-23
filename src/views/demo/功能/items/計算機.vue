@@ -79,6 +79,27 @@ function calcFn (item) {
       if (!mark.includes(lastItem) && left > 0 && isPass) {
         calc.value += item
       }
+    } else if (item === '±') {
+      // 處理: ±
+      // 如果前一個是數字才可以使用
+      if (!mark.includes(lastItem) && lastItem !== undefined) {
+        // 如果先前的數字是負數，則轉換成正數
+        if (calc.value.at(-2) === '負') {
+          const data = calc.value.split('')
+          console.log('前個數字是負數', data)
+          const num = data.at(-1)
+          data.splice(-2, 2)
+          data.push(num)
+          calc.value = data.join('')
+        } else {
+          console.log('前個數字是正數')
+          const data = calc.value.split('')
+          const num = data.at(-1)
+          data.splice(-1, 1)
+          data.push(String(`負${num}`))
+          calc.value = data.join('')
+        }
+      }
     }
   } else {
     // 處理:數字
