@@ -73,19 +73,45 @@ function calcFn (item) {
       // 處理: ±
       // 如果前一個是數字才可以使用
       if (!mark.includes(lastItem) && lastItem !== undefined) {
-        // 如果先前的數字是負數，則轉換成正數
-        if (calc.value.at(-2) === '負') {
-          const data = calc.value.split('')
-          const num = data.at(-1)
-          data.splice(-2, 2)
-          data.push(num)
-          calc.value = data.join('')
-        } else {
-          const data = calc.value.split('')
-          const num = data.at(-1)
-          data.splice(-1, 1)
-          data.push(String(`負${num}`))
-          calc.value = data.join('')
+        // 檢查前一個數字是不是小數
+        // 如果是小數，就要連整個小數一起轉換正負數
+        // 如果不是小數，就只轉換最後一個數字
+        /*
+          1. 找出目前索引
+          2. 找到前一個運算符號的索引
+          3. 使用 slice 取出前一個運算符號到目前的數字
+          4. 使用 includes 判斷是否有小數點
+          5. 有小數點就抓出小數點的索引
+          6. 將整個小數複製下來並轉換正負數
+          7. 使用 splice 刪除整個小數
+          8. 將轉換正負後的小數加回去
+        */
+        const data = calc.value.split('')
+        textHandler()
+
+        function textHandler () {
+          // 先前的數字到符號以前若有"負"的話就是負號
+          // 將整個負號的數字取出 (可能是多位數或小數的負號)
+          // 2＋3.1
+          const curIndex = calc.value.length
+          let lastIndex = 0
+          for (let i = curIndex; i >= 0; i--) {
+            if (mark.includes(calc.value[i]) && calc.value[i] !== '.') {
+              lastIndex = i + 1
+              break
+            }
+          }
+          const number = calc.value.slice(lastIndex, curIndex)
+          // 如果先前的數字是負數，則轉換成正數
+          if (calc.value.at(number.length * -1) === '負') {
+            const data = calc.value.split('')
+            data.splice(number.length * -1, 1) // 把 "負" 刪掉
+            calc.value = data.join('')
+          } else {
+            data.splice(number.length * -1, number.length)
+            data.push(String(`負${number}`))
+            calc.value = data.join('')
+          }
         }
       }
     } else if (item === '.') {
@@ -115,7 +141,14 @@ function calcFn (item) {
         .replace(/×/g, '*')
         .replace(/÷/g, '/')
         .replace(/負/g, '-')
-      result.value = eval(calcData).toFixed(13) // eslint-disable-line
+      result.value = simplifyNumber(eval(calcData).toFixed(13)) // eslint-disable-line
+
+      // 處理 小數後面如果是0，例: 0.000 => 0、1.000 => 1
+      function simplifyNumber (numStr) {
+        const num = parseFloat(numStr)
+        const simplifiedNumStr = num.toFixed(13).replace(/\.?0+$/, '')
+        return parseFloat(simplifiedNumStr)
+      }
     } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
       // 處理: 這次和上次都是 '＋', '－', '×', '÷', '%'
       // 若前面是 '(', ')', '.' 則中斷
