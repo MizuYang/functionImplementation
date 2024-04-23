@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-// console.log(eval((1+2)*3-(4+15))) // eslint-disable-line
+import { ref, computed } from 'vue'
 const data = ref([
   '', '', '清除', '倒退',
   '%', '(', ')', '÷',
@@ -11,6 +10,8 @@ const data = ref([
 ])
 const calc = ref('')
 const result = ref('')
+
+const computedData = computed(() => (calc.value.replace(/負/g, '-')))
 
 function calcFn (item) {
   if (item === '清除') {
@@ -28,17 +29,11 @@ function calcFn (item) {
   if (isMark) {
     // 符號
     const lastItem = calc.value.at(-1)
-    console.log('前一個item', lastItem)
-    console.log('這次的item', item)
 
     // 如果前面有數字, 才可以加入運算符號
     if (!calc.value.split('').length && item !== '(') return
 
-    console.log('執行', item)
-    console.log(canChangeMark.includes(lastItem))
-
     if (item === '(') {
-      console.log('進入 (')
       // 處理: (
       // 如果前面是 '＋', '－', '×', '÷', '%' 或空值，才可以加入'('
       if (canChangeMark.includes(lastItem) || lastItem === undefined) {
@@ -59,7 +54,6 @@ function calcFn (item) {
         }
       }
     } else if (item === ')') {
-      console.log('進入 )')
       // 處理: )
       // 如果前一個是數字，而且前面有烙單的'('，才可以加入')'
       let left = 0
@@ -82,13 +76,11 @@ function calcFn (item) {
         // 如果先前的數字是負數，則轉換成正數
         if (calc.value.at(-2) === '負') {
           const data = calc.value.split('')
-          console.log('前個數字是負數', data)
           const num = data.at(-1)
           data.splice(-2, 2)
           data.push(num)
           calc.value = data.join('')
         } else {
-          console.log('前個數字是正數')
           const data = calc.value.split('')
           const num = data.at(-1)
           data.splice(-1, 1)
@@ -97,7 +89,6 @@ function calcFn (item) {
         }
       }
     } else if (item === '.') {
-      console.log('進入 .')
       // 處理: .
       // 如果前一個是數字，而且前面沒有小數點，才可以加入'.'
       if (!mark.includes(lastItem) && lastItem !== undefined) {
@@ -126,8 +117,6 @@ function calcFn (item) {
         .replace(/負/g, '-')
       result.value = eval(calcData) // eslint-disable-line
     } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
-      console.log("這次和上次都是 '＋', '－', '×', '÷', '%'")
-
       // 處理: 這次和上次都是 '＋', '－', '×', '÷', '%'
       // 若前面是 '(', ')', '.' 則中斷
       const stop = ['(', ')', '.']
@@ -138,7 +127,6 @@ function calcFn (item) {
       calc.value = data.join('')
     } else if (canChangeMark.includes(item)) {
       // 處理: 這次是 '＋', '－', '×', '÷', '%'
-      console.log("這次是 '＋', '－', '×', '÷', '%'")
 
       if (lastItem === undefined) return
       if (lastItem === '(') return
@@ -166,7 +154,7 @@ function calcFn (item) {
       <div>
         <p style="letter-spacing: 4px;">
           <!-- (1+2)*3-(4+5) -->
-          {{ calc }}
+          {{ computedData }}
         </p>
       </div>
 
@@ -176,7 +164,6 @@ function calcFn (item) {
                   letter-spacing: 4px;
                   line-height: 1.2;">
           <!-- 123456 -->
-          <!-- {{ tempNum || result || 0 }} -->
           {{ result || 0 }}
         </p>
       </div>
