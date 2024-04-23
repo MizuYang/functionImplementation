@@ -115,7 +115,7 @@ function calcFn (item) {
         .replace(/×/g, '*')
         .replace(/÷/g, '/')
         .replace(/負/g, '-')
-      result.value = eval(calcData) // eslint-disable-line
+      result.value = eval(calcData).toFixed(13) // eslint-disable-line
     } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
       // 處理: 這次和上次都是 '＋', '－', '×', '÷', '%'
       // 若前面是 '(', ')', '.' 則中斷
