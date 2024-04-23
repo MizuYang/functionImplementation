@@ -40,6 +40,29 @@ function calcFn (item) {
 
     console.log('執行', item)
     console.log(canChangeMark.includes(lastItem))
+
+    if (item === '(') {
+      console.log('進入 (')
+      // 處理: (
+      // 如果前面是 '＋', '－', '×', '÷', '%' 或空值，才可以加入'('
+      if (canChangeMark.includes(lastItem) || lastItem === undefined) {
+        // 如果前面沒有烙單的 '('，才可以加入'('
+        let left = 0
+        let right = 0
+        for (let i = 0; i < calc.value.length; i++) {
+          if (calc.value[i] === '(') {
+            left++
+          } else if (calc.value[i] === ')') {
+            right++
+          }
+        }
+        const isPass = left === right
+
+        if (isPass) {
+          calc.value += item
+        }
+      }
+    }
   } else {
     // 處理:數字
     calc.value += item
