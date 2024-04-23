@@ -22,8 +22,10 @@ const result = ref('')
 
 function calcFn (item) {
   if (item === '清除') {
+    calc.value = ''
     return
   } else if (item === '倒退') {
+    calc.value = calc.value.slice(0, -1)
     return
   }
   // 先區分是數字還是運算符號
