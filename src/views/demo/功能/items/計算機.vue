@@ -100,6 +100,17 @@ function calcFn (item) {
           calc.value = data.join('')
         }
       }
+    } else if (canChangeMark.includes(item) && canChangeMark.includes(lastItem)) {
+      console.log("這次和上次都是 '＋', '－', '×', '÷', '%'")
+
+      // 處理: 這次和上次都是 '＋', '－', '×', '÷', '%'
+      // 若前面是 '(', ')', '.' 則中斷
+      const stop = ['(', ')', '.']
+      if (stop.includes(lastItem)) return
+      // 若前個字元是'＋', '－', '×', '÷', '%'，則可以更換符號
+      const data = calc.value.split('')
+      data[data.length - 1] = item
+      calc.value = data.join('')
     }
   } else {
     // 處理:數字
