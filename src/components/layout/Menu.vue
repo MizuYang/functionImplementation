@@ -36,7 +36,7 @@ watch(() => route.path, () => {
         <template v-for="item in 功能data.page" :key="item.pageName">
           <li>
             <RouterLink :to='`${item.routerPath}`'
-                        class="d-block w-100 ps-3 py-2"
+                        class="btn-menu d-block w-100 ps-3 py-2"
                         :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
@@ -106,6 +106,10 @@ nav {
     color: #fff;
     background-color:#6f6f6f;
   }
+  &:active {
+    color: #fff;
+    background-color:rgba(244, 221, 239, 0.724);
+  }
   &:hover > span {
     font-weight: 700;
     margin-left: 5px;
@@ -122,6 +126,10 @@ nav {
   }
 }
 .active-page {
-  background-color:#9c75d4;
+  background-color:#9c75d4 !important;
+
+  &:active {
+    background-color:#9d75d4c6 !important;
+  }
 }
 </style>
