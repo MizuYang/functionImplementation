@@ -6,6 +6,7 @@ const students = ref([])
 // 等待點名的學生名單
 const waitRollcallStudents = ref([])
 const timer = ref(null)
+const rollcallIng = ref(false)
 
 getStudents()
 waitRollcallStudents.value = JSON.parse(JSON.stringify(students.value))
@@ -24,6 +25,8 @@ function getStudents () {
 function startRollcall () {
   if (!waitRollcallStudents.value.length) return
 
+  rollcallIng.value = true
+
   timer.value = setTimeout(() => {
     // 隨機從等待點名名單抽一名學生
     const student = waitRollcallStudents.value[Math.floor(Math.random() * waitRollcallStudents.value.length)]
@@ -40,6 +43,7 @@ function startRollcall () {
   }, 300)
 }
 function stopRollcall () {
+  rollcallIng.value = false
   clearTimeout(timer.value)
 }
 </script>
@@ -52,12 +56,14 @@ function stopRollcall () {
       <div class="text-center mb-10">
         <button type="button"
                 class="btn btn-rollcall border"
-                @click="startRollcall">
+                @click="startRollcall"
+                :disabled="rollcallIng">
           開始隨機點名
         </button>
         <button type="button"
                 class="btn btn-rollcall border mx-10"
-                @click="stopRollcall">
+                @click="stopRollcall"
+                :disabled="!rollcallIng||!waitRollcallStudents.length">
           停止點名
         </button>
       </div>
