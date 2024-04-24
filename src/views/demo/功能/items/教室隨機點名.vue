@@ -20,6 +20,24 @@ function getStudents () {
     }
   }
 }
+function startRollcall () {
+  if (!waitRollcallStudents.value.length) return
+
+  setTimeout(() => {
+    // 隨機從等待點名名單抽一名學生
+    const student = waitRollcallStudents.value[Math.floor(Math.random() * waitRollcallStudents.value.length)]
+
+    // 將該學生標記為已點名
+    students.value[student.index].isRollcalled = true
+
+    // 將該學生從等待點名名單中移除
+    const delIdx = waitRollcallStudents.value.findIndex(item => item.index === student.index)
+    waitRollcallStudents.value.splice(delIdx, 1)
+
+    // 如果還有學生在等待點名，則繼續點名
+    if (waitRollcallStudents.value) startRollcall()
+  }, 300)
+}
 </script>
 
 <template>
@@ -29,7 +47,8 @@ function getStudents () {
 
       <div class="text-center mb-10">
         <button type="button"
-                class="btn btn-rollcall border">
+                class="btn btn-rollcall border"
+                @click="startRollcall">
           開始隨機點名
         </button>
         <button type="button"
