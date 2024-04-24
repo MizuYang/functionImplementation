@@ -64,7 +64,7 @@ const routes = [
         ]
       },
       { // 元件
-        path: '元件',
+        path: 'components',
         name: '元件區塊',
         meta: {
           title: '元件區塊'
@@ -72,14 +72,14 @@ const routes = [
         component: () => import('@/views/demo/元件/元件.vue'),
 
         children: [
-          // {
-          //   path: '',
-          //   name: '',
-          //   meta: {
-          //     title: ''
-          //   },
-          //   component: () => import('@/views/demo/元件/items/.vue')
-          // }
+          {
+            path: 'page1',
+            name: '音樂播放器',
+            meta: {
+              title: '音樂播放器'
+            },
+            component: () => import('@/views/demo/元件/items/音樂播放器.vue')
+          }
         ]
       }
     ]

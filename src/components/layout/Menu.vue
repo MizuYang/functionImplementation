@@ -57,6 +57,7 @@ watch(() => route.path, () => {
           <li>
             <RouterLink :to='item.routerPath'
                         class="d-block w-100 ps-3 py-2"
+                        :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
             </RouterLink>
@@ -76,6 +77,7 @@ watch(() => route.path, () => {
           <li>
             <RouterLink :to='item.routerPath'
                         class="d-block w-100 ps-3 py-2"
+                        :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
             </RouterLink>
