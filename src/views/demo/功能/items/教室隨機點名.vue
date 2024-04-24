@@ -5,6 +5,7 @@ import { ref } from 'vue'
 const students = ref([])
 // 等待點名的學生名單
 const waitRollcallStudents = ref([])
+const timer = ref(null)
 
 getStudents()
 waitRollcallStudents.value = JSON.parse(JSON.stringify(students.value))
@@ -23,7 +24,7 @@ function getStudents () {
 function startRollcall () {
   if (!waitRollcallStudents.value.length) return
 
-  setTimeout(() => {
+  timer.value = setTimeout(() => {
     // 隨機從等待點名名單抽一名學生
     const student = waitRollcallStudents.value[Math.floor(Math.random() * waitRollcallStudents.value.length)]
 
@@ -37,6 +38,9 @@ function startRollcall () {
     // 如果還有學生在等待點名，則繼續點名
     if (waitRollcallStudents.value) startRollcall()
   }, 300)
+}
+function stopRollcall () {
+  clearTimeout(timer.value)
 }
 </script>
 
@@ -52,7 +56,8 @@ function startRollcall () {
           開始隨機點名
         </button>
         <button type="button"
-                class="btn btn-rollcall border mx-10">
+                class="btn btn-rollcall border mx-10"
+                @click="stopRollcall">
           停止點名
         </button>
       </div>
