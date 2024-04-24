@@ -33,6 +33,14 @@ const routes = [
               title: '計算機'
             },
             component: () => import('@/views/demo/功能/items/計算機.vue')
+          },
+          {
+            path: 'page3',
+            name: '教室隨機點名',
+            meta: {
+              title: '教室隨機點名'
+            },
+            component: () => import('@/views/demo/功能/items/教室隨機點名.vue')
           }
         ]
       },

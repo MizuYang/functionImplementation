@@ -12,6 +12,9 @@ export const use功能Store = defineStore('功能', () => {
       },
       {
         pageName: '計算機'
+      },
+      {
+        pageName: '教室隨機點名'
       }
     ]
   })
