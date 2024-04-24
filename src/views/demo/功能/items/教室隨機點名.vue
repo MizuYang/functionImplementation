@@ -8,19 +8,21 @@ const waitRollcallStudents = ref([])
 const timer = ref(null)
 const rollcallIng = ref(false)
 
-getStudents()
-waitRollcallStudents.value = JSON.parse(JSON.stringify(students.value))
+init()
 
 function getStudents () {
   const studentsNumber = 30
 
+  const data = []
+
   for (let i = 0; i < studentsNumber; i++) {
-    students.value[i] = {
+    data[i] = {
       index: i,
       name: `學生${i + 1}`,
       isRollcalled: false
     }
   }
+  students.value = data
 }
 function startRollcall () {
   if (!waitRollcallStudents.value.length) return
@@ -40,11 +42,19 @@ function startRollcall () {
 
     // 如果還有學生在等待點名，則繼續點名
     if (waitRollcallStudents.value) startRollcall()
-  }, 300)
+  }, 100)
+}
+function getWaitRollcall () {
+  waitRollcallStudents.value = JSON.parse(JSON.stringify(students.value))
 }
 function stopRollcall () {
   rollcallIng.value = false
   clearTimeout(timer.value)
+}
+function init () {
+  getStudents()
+  getWaitRollcall()
+  rollcallIng.value = false
 }
 </script>
 
@@ -65,6 +75,11 @@ function stopRollcall () {
                 @click="stopRollcall"
                 :disabled="!rollcallIng||!waitRollcallStudents.length">
           停止點名
+        </button>
+        <button type="button"
+                class="btn btn-rollcall border mx-10"
+                @click="init">
+          重置點名清單
         </button>
       </div>
 
