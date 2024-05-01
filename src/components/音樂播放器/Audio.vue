@@ -28,6 +28,13 @@ const playerStyleConputed = computed(() => {
   }
 })
 
+const progressStyleComputed = computed(() => {
+  return {
+    width: props.options.playerProgressWidth || props.playerProgressWidth,
+    height: props.options.playerProgressHeight || props.playerProgressHeight,
+    backgroundColor: props.options.playerProgressBgColor || props.playerProgressBgColor
+  }
+})
 </script>
 
 <template>
@@ -45,6 +52,14 @@ const playerStyleConputed = computed(() => {
                   `height: ${playIconHeight}`
               ]">
         </a>
+
+        <!-- 進度條 -->
+        <div class="d-flex align-items-center">
+          <span
+            class="d-inline-block raduis-8 ms-3"
+            :style="progressStyleComputed">
+          </span>
+        </div>
       </div>
   </div>
   <!-- 繼續把其他的按鈕加入
