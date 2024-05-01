@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps } from 'vue'
+import { computed, defineProps } from 'vue'
 import {
   playerStyle,
   progressStyle,
@@ -8,22 +8,33 @@ import {
 } from '@/components/音樂播放器/props/index.js'
 
 const props = defineProps({
+  options: {
+    type: Object,
+    default: () => ({})
+  },
   ...playerStyle,
   ...progressStyle,
   ...iconStyle,
   ...other
 })
 
+console.log(props)
+
+const playerStyleConputed = computed(() => {
+  return {
+    width: props.options.playerWidth || props.playerWidth,
+    height: props.options.playerHeight || props.playerHeight,
+    backgroundColor: props.options.playerBackgroundColor || props.playerBackgroundColor
+  }
+})
+
 </script>
 
 <template>
-  <div :style="[
-        `width: ${props.playerWidth}`,
-        `height: ${props.playerHeight}`,
-        `background-color: ${props.playerBackgroundColor}`
-       ]">
+  <div :style="playerStyleConputed">
 
-      <div>
+      <div class="d-flex align-items-center">
+        <!-- 播放按鈕 -->
         <a href="javascript:;"
            class="d-inline-block my-1 ms-4">
           <img src="@/assets/元件/音樂播放器/播放.svg"
