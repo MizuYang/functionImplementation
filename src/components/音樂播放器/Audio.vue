@@ -1,113 +1,17 @@
 <script setup>
 import { defineProps } from 'vue'
+import {
+  playerStyle,
+  progressStyle,
+  iconStyle,
+  other
+} from '@/components/音樂播放器/props/index.js'
 
 const props = defineProps({
-  // 播放器外觀
-  playerWidth: {
-    type: String,
-    default: '480px'
-  },
-  playerHeight: {
-    type: String,
-    default: '40px'
-  },
-  playerTextColor: {
-    type: String,
-    default: '#fff'
-  },
-  playerBackgroundColor: {
-    type: String,
-    default: '#484848'
-  },
-
-  // 進度條相關
-  playerProgressWidth: {
-    type: String,
-    default: '200px'
-  },
-  playerProgressHeight: {
-    type: String,
-    default: '5px'
-  },
-  playerProgressBgColor: {
-    type: String,
-    default: '#fff'
-  },
-  volProgressWidth: {
-    type: String,
-    default: '53px'
-  },
-  volProgressHeight: {
-    type: String,
-    default: '5px'
-  },
-  volProgressColor: {
-    type: String,
-    default: '#fff'
-  },
-
-  // icon
-  // 音樂播放按鈕
-  // playIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/播放.svg'
-  // },
-  playIconWidth: {
-    type: String,
-    default: '32px'
-  },
-  playIconHeight: {
-    type: String,
-    default: '32px'
-  },
-
-  // 音樂暫停按鈕
-  // pauseIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/暫停.svg'
-  // },
-  pauseIconWidth: {
-    type: String,
-    default: '32px'
-  },
-  pauseIconHeight: {
-    type: String,
-    default: '32px'
-  },
-
-  // 大音量 icon
-  // volUpIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/音量大.svg'
-  // },
-  volUpIconWidth: {
-    type: String,
-    default: '22px'
-  },
-  volUpIconHeight: {
-    type: String,
-    default: '22px'
-  },
-
-  // 小音量 icon
-  // volDownIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/音量小.svg'
-  // },
-  volDownIconWidth: {
-    type: String,
-    default: '22px'
-  },
-  volDownIconHeight: {
-    type: String,
-    default: '22px'
-  },
-
-  // 其他
-  async: { // true: 點擊播放器才取得音樂 url
-    type: Boolean,
-    default: true
-  }
+  ...playerStyle,
+  ...progressStyle,
+  ...iconStyle,
+  ...other
 })
 
 </script>
