@@ -2,7 +2,8 @@
 import Audio from '@/components/音樂播放器/Audio.vue'
 
 const options = {
-  // 撥放器基本外觀參數
+
+  // 播放器基本外觀參數
   playerWidth: '',
   playerHeight: '',
   playerTextColor: '',
@@ -32,6 +33,8 @@ const options = {
   soundIconWidth: '',
   soundIconHeight: '',
 
+  // 音樂 url
+  audioUrl: '',
   // 點擊播放器才取得音樂 url (非同步)
   async: true
 }
