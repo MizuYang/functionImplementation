@@ -30,10 +30,10 @@ export const iconStyle = {
 
   soundIconWidth: {
     type: String,
-    default: '22px'
+    default: '24px'
   },
   soundIconHeight: {
     type: String,
-    default: '22px'
+    default: '24px'
   }
 }

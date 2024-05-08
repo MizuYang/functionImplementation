@@ -50,26 +50,33 @@ const playerTextStyleComputed = computed(() => {
   }
 })
 
+const soundIconStyleComputed = computed(() => {
+  return {
+    width: props.options.soundIconWidth || props.soundIconWidth,
+    height: props.options.soundIconHeight || props.soundIconHeight
+  }
+})
+
 </script>
 
 <template>
-  <div :style="playerStyleConputed">
+  <div class="d-flex align-items-center"
+       :style="playerStyleConputed">
 
       <div class="d-flex align-items-center">
         <!-- 播放按鈕 -->
         <a href="javascript:;"
-           class="d-inline-block my-1 ms-4">
+           class="d-inline-block ms-4">
           <img src="@/assets/元件/音樂播放器/播放.svg"
-              class="img-fluid d-inline-block"
-              alt="播放icon"
-              :style="playIconStyleComputed">
+               class="img-fluid d-inline-block"
+               alt="播放icon"
+               :style="playIconStyleComputed">
         </a>
 
         <!-- 進度條 -->
         <div class="d-flex align-items-center">
-          <span
-            class="d-inline-block raduis-8 ms-3"
-            :style="progressStyleComputed">
+          <span class="d-inline-block raduis-8 ms-3"
+                :style="progressStyleComputed">
           </span>
         </div>
 
@@ -78,6 +85,15 @@ const playerTextStyleComputed = computed(() => {
            :style="playerTextStyleComputed">
           00:00 / 01:28
         </p>
+
+        <!-- 音量 icon -->
+        <a href="javascript:;"
+           class="d-inline-block ms-4">
+          <img src="@/assets/元件/音樂播放器/音量大.svg"
+              class="img-fluid d-block"
+              alt="聲音icon"
+              :style="soundIconStyleComputed">
+        </a>
       </div>
   </div>
   <!-- 繼續把其他的按鈕加入
