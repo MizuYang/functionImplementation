@@ -28,15 +28,9 @@ const options = {
   pauseIconWidth: '',
   pauseIconHeight: '',
 
-  // 有聲音icon
-  volUpIconUrl: '',
-  volUpIconWidth: '',
-  volUpIconHeight: '',
-
-  // 靜音icon
-  volDownIconUrl: '',
-  volDownIconWidth: '',
-  volDownIconHeight: '',
+  // 聲音 icon
+  soundIconWidth: '',
+  soundIconHeight: '',
 
   // 點擊播放器才取得音樂 url (非同步)
   async: true

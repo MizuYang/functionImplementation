@@ -28,30 +28,11 @@ export const iconStyle = {
     default: '32px'
   },
 
-  // 大音量 icon
-  // volUpIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/音量大.svg'
-  // },
-  volUpIconWidth: {
+  soundIconWidth: {
     type: String,
     default: '22px'
   },
-  volUpIconHeight: {
-    type: String,
-    default: '22px'
-  },
-
-  // 小音量 icon
-  // volDownIconUrl: {
-  //   type: String,
-  //   default: '@/assets/元件/音樂播放器/音量小.svg'
-  // },
-  volDownIconWidth: {
-    type: String,
-    default: '22px'
-  },
-  volDownIconHeight: {
+  soundIconHeight: {
     type: String,
     default: '22px'
   }
