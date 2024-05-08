@@ -43,6 +43,13 @@ const playIconStyleComputed = computed(() => {
     height: props.options.playIconHeight || props.playIconHeight
   }
 })
+
+const playerTextStyleComputed = computed(() => {
+  return {
+    color: props.options.playerTextColor || props.playerTextColor
+  }
+})
+
 </script>
 
 <template>
@@ -65,6 +72,12 @@ const playIconStyleComputed = computed(() => {
             :style="progressStyleComputed">
           </span>
         </div>
+
+        <!-- 音樂時間 -->
+        <p class="ps-8"
+           :style="playerTextStyleComputed">
+          00:00 / 01:28
+        </p>
       </div>
   </div>
   <!-- 繼續把其他的按鈕加入
