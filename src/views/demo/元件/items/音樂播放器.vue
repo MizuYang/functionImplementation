@@ -14,9 +14,9 @@ const options = {
   playerProgressBgColor: '',
 
   // 音量進度條
-  volProgressWidth: '',
-  volProgressHeight: '',
-  volProgressColor: '',
+  soundProgressWidth: '',
+  soundProgressHeight: '',
+  soundProgressColor: '',
 
   // 播放按鈕icon
   playIconUrl: '',

@@ -6,21 +6,21 @@ export const progressStyle = {
   },
   playerProgressHeight: {
     type: String,
-    default: '5px'
+    default: '7px'
   },
   playerProgressBgColor: {
     type: String,
     default: '#fff'
   },
-  volProgressWidth: {
+  soundProgressWidth: {
     type: String,
     default: '53px'
   },
-  volProgressHeight: {
+  soundProgressHeight: {
     type: String,
-    default: '5px'
+    default: '7px'
   },
-  volProgressColor: {
+  soundProgressColor: {
     type: String,
     default: '#fff'
   }

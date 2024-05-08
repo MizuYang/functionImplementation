@@ -57,6 +57,14 @@ const soundIconStyleComputed = computed(() => {
   }
 })
 
+const soundProgressStyleComputed = computed(() => {
+  return {
+    width: props.options.soundProgressWidth || props.soundProgressWidth,
+    height: props.options.soundProgressHeight || props.soundProgressHeight,
+    backgroundColor: props.options.soundProgressColor || props.soundProgressColor
+  }
+})
+
 </script>
 
 <template>
@@ -75,7 +83,7 @@ const soundIconStyleComputed = computed(() => {
 
         <!-- 進度條 -->
         <div class="d-flex align-items-center">
-          <span class="d-inline-block raduis-8 ms-3"
+          <span class="d-inline-block raduis-8 cursor-pointer ms-3"
                 :style="progressStyleComputed">
           </span>
         </div>
@@ -94,6 +102,13 @@ const soundIconStyleComputed = computed(() => {
               alt="聲音icon"
               :style="soundIconStyleComputed">
         </a>
+
+        <!-- 音量進度條 -->
+        <div class="d-flex align-items-center">
+          <span class="d-inline-block raduis-8 cursor-pointer ms-3"
+                :style="soundProgressStyleComputed">
+          </span>
+        </div>
       </div>
   </div>
   <!-- 繼續把其他的按鈕加入
