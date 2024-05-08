@@ -1,11 +1,14 @@
 <script setup>
-import { computed, defineProps } from 'vue'
+import { ref, computed, onMounted, defineProps } from 'vue'
+import { AudioPlayer } from '@/utils/class/audioPlayer.js'
 import {
   playerStyle,
   progressStyle,
   iconStyle,
   other
 } from '@/components/音樂播放器/props/index.js'
+import playIcon from '@/assets/元件/音樂播放器/播放.svg'
+import pauseIcon from '@/assets/元件/音樂播放器/暫停.svg'
 
 const props = defineProps({
   options: {
@@ -18,7 +21,25 @@ const props = defineProps({
   ...other
 })
 
+// data
+const audioPlayer = ref(null)
 console.log(props)
+
+onMounted(() => {
+  audioPlayer.value = new AudioPlayer(audioPlayerUrl.value)
+})
+
+function playToggle () {
+  audioPlayer.value.playToggle()
+}
+
+const audioPlayerUrl = computed(() => {
+  return props.options.audioUrl || props.audioUrl
+})
+
+const playToggleIcon = computed(() => {
+  return audioPlayer?.value?.paused ? playIcon : pauseIcon
+})
 
 // 有 props options 配置選項就用 props.options 的值, 否則用 props 預設值
 const playerStyleConputed = computed(() => {
@@ -72,13 +93,14 @@ const soundProgressStyleComputed = computed(() => {
        :style="playerStyleConputed">
 
       <div class="d-flex align-items-center">
-        <!-- 播放按鈕 -->
+        <!-- 播放按鈕, 暫停按鈕 -->
         <a href="javascript:;"
-           class="d-inline-block ms-4">
-          <img src="@/assets/元件/音樂播放器/播放.svg"
-               class="img-fluid d-inline-block"
-               alt="播放icon"
-               :style="playIconStyleComputed">
+           class="d-inline-block ms-4"
+           @click="playToggle">
+          <img :src="playToggleIcon"
+                class="img-fluid d-inline-block"
+                alt="播放icon"
+                :style="playIconStyleComputed">
         </a>
 
         <!-- 進度條 -->
