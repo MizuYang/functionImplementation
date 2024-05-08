@@ -20,6 +20,7 @@ const props = defineProps({
 
 console.log(props)
 
+// 有 props options 配置選項就用 props.options 的值, 否則用 props 預設值
 const playerStyleConputed = computed(() => {
   return {
     width: props.options.playerWidth || props.playerWidth,
@@ -35,6 +36,13 @@ const progressStyleComputed = computed(() => {
     backgroundColor: props.options.playerProgressBgColor || props.playerProgressBgColor
   }
 })
+
+const playIconStyleComputed = computed(() => {
+  return {
+    maxWidth: props.options.playIconWidth || props.playIconWidth,
+    height: props.options.playIconHeight || props.playIconHeight
+  }
+})
 </script>
 
 <template>
@@ -47,10 +55,7 @@ const progressStyleComputed = computed(() => {
           <img src="@/assets/元件/音樂播放器/播放.svg"
               class="img-fluid d-inline-block"
               alt="播放icon"
-              :style="[
-                  `width: ${playIconWidth}`,
-                  `height: ${playIconHeight}`
-              ]">
+              :style="playIconStyleComputed">
         </a>
 
         <!-- 進度條 -->
