@@ -2,7 +2,7 @@ export const playerStyle = {
   // 播放器外觀
   playerWidth: {
     type: String,
-    default: '480px'
+    default: '460px'
   },
   playerHeight: {
     type: String,

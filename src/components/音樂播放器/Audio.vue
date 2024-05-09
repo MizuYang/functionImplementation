@@ -86,6 +86,9 @@ const soundProgressStyleComputed = computed(() => {
   }
 })
 
+const playerProgressColorComputed = computed(() => {
+  return props.options.playerProgressColor || props.playerProgressColor
+})
 </script>
 
 <template>
@@ -105,9 +108,13 @@ const soundProgressStyleComputed = computed(() => {
 
         <!-- 進度條 -->
         <div class="d-flex align-items-center">
-          <span class="d-inline-block raduis-8 cursor-pointer ms-3"
-                :style="progressStyleComputed">
-          </span>
+          <progress class="audio-progress d-inline-block raduis-8 cursor-pointer ms-3"
+                    value="30"
+                    min="0"
+                    max="100"
+                    :style="[`${progressStyleComputed}`,
+                            `--audio-progress-color:${playerProgressColorComputed};`]">
+          </progress>
         </div>
 
         <!-- 音樂時間 -->
@@ -127,9 +134,12 @@ const soundProgressStyleComputed = computed(() => {
 
         <!-- 音量進度條 -->
         <div class="d-flex align-items-center">
-          <span class="d-inline-block raduis-8 cursor-pointer ms-3"
-                :style="soundProgressStyleComputed">
-          </span>
+          <progress class="d-inline-block raduis-8 cursor-pointer ms-3"
+                    value="30"
+                    min="20"
+                    max="100"
+                    :style="soundProgressStyleComputed">
+          </progress>
         </div>
       </div>
   </div>
@@ -139,5 +149,10 @@ const soundProgressStyleComputed = computed(() => {
 </template>
 
 <style lang='scss' scope>
-
+progress.audio-progress::-moz-progress-bar {
+  background-color: var(--audio-progress-color);
+}
+progress.audio-progress::-webkit-progress-value {
+  background-color: var(--audio-progress-color);
+}
 </style>

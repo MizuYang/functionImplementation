@@ -12,6 +12,7 @@ const options = {
   // 播放進度條
   playerProgressWidth: '',
   playerProgressHeight: '',
+  playerProgressColor: '',
   playerProgressBgColor: '',
 
   // 音量進度條
