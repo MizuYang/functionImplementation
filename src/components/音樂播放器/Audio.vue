@@ -82,12 +82,16 @@ const soundProgressStyleComputed = computed(() => {
   return {
     width: props.options.soundProgressWidth || props.soundProgressWidth,
     height: props.options.soundProgressHeight || props.soundProgressHeight,
-    backgroundColor: props.options.soundProgressColor || props.soundProgressColor
+    backgroundColor: props.options.soundProgressBgColor || props.soundProgressBgColor
   }
 })
 
 const playerProgressColorComputed = computed(() => {
   return props.options.playerProgressColor || props.playerProgressColor
+})
+
+const soundProgressColorComputed = computed(() => {
+  return props.options.soundProgressColor || props.soundProgressColor
 })
 </script>
 
@@ -134,11 +138,12 @@ const playerProgressColorComputed = computed(() => {
 
         <!-- 音量進度條 -->
         <div class="d-flex align-items-center">
-          <progress class="d-inline-block raduis-8 cursor-pointer ms-3"
+          <progress class="sound-progress d-inline-block raduis-8 cursor-pointer ms-3"
                     value="30"
-                    min="20"
+                    min="0"
                     max="100"
-                    :style="soundProgressStyleComputed">
+                    :style="[soundProgressStyleComputed,
+                             `--sound-progress-color:${soundProgressColorComputed};`]">
           </progress>
         </div>
       </div>
@@ -154,5 +159,11 @@ progress.audio-progress::-moz-progress-bar {
 }
 progress.audio-progress::-webkit-progress-value {
   background-color: var(--audio-progress-color);
+}
+progress.sound-progress::-moz-progress-bar {
+  background-color: var(--sound-progress-color);
+}
+progress.sound-progress::-webkit-progress-value {
+  background-color: var(--sound-progress-color);
 }
 </style>

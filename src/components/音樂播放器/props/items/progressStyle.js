@@ -24,6 +24,10 @@ export const progressStyle = {
     type: String,
     default: '7px'
   },
+  soundProgressBgColor: {
+    type: String,
+    default: '#fff'
+  },
   soundProgressColor: {
     type: String,
     default: '#fff'
