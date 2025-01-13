@@ -31,12 +31,12 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 功能data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 功能data.page" :key="item.pageName">
           <li>
             <RouterLink :to='`${item.routerPath}`'
-                        class="d-block w-100 ps-3 py-2"
+                        class="btn-menu d-block w-100 ps-3 py-2"
                         :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
@@ -51,12 +51,13 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 考題data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 考題data.page" :key="item.pageName">
           <li>
             <RouterLink :to='item.routerPath'
                         class="d-block w-100 ps-3 py-2"
+                        :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
             </RouterLink>
@@ -70,12 +71,13 @@ watch(() => route.path, () => {
       <h3 class="text-center text-light fw-bold-9 pt-5">
         {{ 元件data.title }}
       </h3>
-      <ul class="px-2 py-5"
+      <ul class="menu px-2 py-5"
           id="menu">
         <template v-for="item in 元件data.page" :key="item.pageName">
           <li>
             <RouterLink :to='item.routerPath'
                         class="d-block w-100 ps-3 py-2"
+                        :class="{'active-page': curPageId===item.routerPath}"
                         active-class='active'>
               <span>{{ item.pageName }}</span>
             </RouterLink>
@@ -93,18 +95,22 @@ nav {
   min-height: 100vh;
   background-color:#535353;
 }
-ul > li:nth-child(1) {
+.menu li:nth-child(1) {
   border-top: 1px solid #fff;
 }
-ul > li {
+.menu li {
   border-bottom: 1px solid #fff;
 }
-ul > li > a {
+.menu li > a {
   color: #fff;
 
   &:hover {
     color: #fff;
     background-color:#6f6f6f;
+  }
+  &:active {
+    color: #fff;
+    background-color:rgba(244, 221, 239, 0.724);
   }
   &:hover > span {
     font-weight: 700;
@@ -122,6 +128,10 @@ ul > li > a {
   }
 }
 .active-page {
-  background-color:#9c75d4;
+  background-color:#9c75d4 !important;
+
+  &:active {
+    background-color:#9d75d4c6 !important;
+  }
 }
 </style>
