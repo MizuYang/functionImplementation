@@ -1,0 +1,1 @@
+progress.audio-progress::-moz-progress-bar{background-color:var(--audio-progress-color)}progress.audio-progress::-webkit-progress-value{background-color:var(--audio-progress-color)}progress.sound-progress::-moz-progress-bar{background-color:var(--sound-progress-color)}progress.sound-progress::-webkit-progress-value{background-color:var(--sound-progress-color)}
