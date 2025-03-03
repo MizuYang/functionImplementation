@@ -43,7 +43,7 @@ const routes = [
             component: () => import('@/views/demo/功能/items/教室隨機點名.vue')
           },
           {
-            path: 'page2',
+            path: 'page4',
             name: '圖片放大鏡',
             meta: {
               title: '圖片放大鏡'
